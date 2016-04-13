@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+	xsi:schemaLocation="http://www.springframework.org/schema/data/elasticsearch 
+       http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch-1.0.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- <bean/> definitions here -->
+	<!-- 
+
+
+	<bean
+		class="org.springframework.data.elasticsearch.client.NodeClientFactoryBean"
+		name="client" init-method="afterPropertiesSet">
+		<property name="local" value="true"></property>
+		<property name="enableHttp" value="true"></property>
+		<property name="clusterName" value="sample"></property>
+	</bean>
+
+-->
+	<elasticsearch:repositories base-package="org.springframework.data.elasticsearch"/>
+
+  <elasticsearch:node-client id="client" local="true"/>
+
+	<bean name="elasticsearchTemplate"
+		class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+		<constructor-arg name="client" ref="client" />
+	</bean>
+</beans>
